@@ -3,13 +3,41 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.udojava</groupId>
 	<artifactId>jmxwrapper</artifactId>
-	<version>1.0</version>
+	<version>1.0.1</version>
 	<name>JMXWrapper</name>
 	<description>JMXWrapper is a wrapper that allows creation of dynamic JMX MBeans through annotations</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+
+    <distributionManagement>
+        <repository>
+            <id>internal</id>
+            <url>http://git01.corp.farecompare.com:8080/archiva/repository/internal</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <url>http://git01.corp.farecompare.com:8080/archiva/repository/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <repositories>
+        <repository>
+            <id>internal</id>
+            <url>http://git01.corp.farecompare.com:8080/archiva/repository/internal</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>snapshots</id>
+            <url>http://git01.corp.farecompare.com:8080/archiva/repository/snapshots</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
 	<build>
 		<sourceDirectory>src</sourceDirectory>

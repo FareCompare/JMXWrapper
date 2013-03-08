@@ -345,7 +345,15 @@ public class JMXBeanWrapper implements DynamicMBean {
 	 */
 	private boolean signatureMatches(String[] signature, Method method) {
 		int i = 0;
-		for (Class<?> clazz : method.getParameterTypes()) {
+        final Class<?>[] parameterTypes = method.getParameterTypes();
+        if ( (parameterTypes == null || parameterTypes.length == 0 ) && (signature == null || signature.length==0)) return true;
+        if ( parameterTypes == null ) return false;
+        if ( signature == null ) return false;
+
+        if ( parameterTypes.length != signature.length ) {
+            return false;
+        }
+		for (Class<?> clazz : parameterTypes ) {
 			if (!clazz.getName().equals(signature[i++]))
 				return false;
 		}
@@ -359,8 +367,8 @@ public class JMXBeanWrapper implements DynamicMBean {
 		if (methodName != null) {
 			try {
 				for (Method method : bean.getClass().getMethods()) {
-					if (method.getName().equals(methodName)
-							&& signatureMatches(signature, method))
+					if ( method.getName().equals(methodName) &&
+                         signatureMatches(signature, method))
 						return method.invoke(bean, params);
 				}
 			} catch (Exception ex) {

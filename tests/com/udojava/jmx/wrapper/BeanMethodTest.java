@@ -23,10 +23,14 @@ public class BeanMethodTest {
 		}
 		
 		@JMXBeanOperation(name="Renamed Method")
-		public String renamedMethod() {
+		public String renamedMethod(int how) {
 			return "ok";
 		}
-	}
+        @JMXBeanOperation(name="Renamed Method")
+        public String renamedMethod() {
+            return "ok";
+        }
+    }
 
 	@Test
 	public void testVoidMethod() throws IntrospectionException, SecurityException, MBeanException, ReflectionException {
@@ -47,5 +51,12 @@ public class BeanMethodTest {
 		JMXBeanWrapper bean = new JMXBeanWrapper(new TestBean1());
 		
 		assertEquals("ok", bean.invoke("Renamed Method", null, null));
+	}
+
+    @Test
+	public void testRenamedMethodOverloaded() throws IntrospectionException, SecurityException, MBeanException, ReflectionException {
+		JMXBeanWrapper bean = new JMXBeanWrapper(new TestBean1());
+
+		assertEquals("ok", bean.invoke("Renamed Method", new Object[]{1}, new String[] {"int"}));
 	}
 }
