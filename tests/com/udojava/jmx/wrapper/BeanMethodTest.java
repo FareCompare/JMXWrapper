@@ -1,9 +1,11 @@
 package com.udojava.jmx.wrapper;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 import javax.management.IntrospectionException;
 import javax.management.MBeanException;
+import javax.management.MBeanOperationInfo;
 import javax.management.ReflectionException;
 
 import org.junit.Test;
@@ -29,6 +31,15 @@ public class BeanMethodTest {
         @JMXBeanOperation(name="Renamed Method")
         public String renamedMethod() {
             return "ok";
+        }
+    }
+
+    @Test
+    public void testOrderOfMethods() throws Exception {
+        for ( int i=0; i < 50; i++ ) {
+            JMXBeanWrapper bean = new JMXBeanWrapper(new TestBean1());
+            MBeanOperationInfo[] operations = bean.getMBeanInfo().getOperations();
+            assertThat( "Failed at iteration " + i, operations[0].getName(), is( "complexMethod") );
         }
     }
 

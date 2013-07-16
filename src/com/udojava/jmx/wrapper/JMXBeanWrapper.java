@@ -27,15 +27,14 @@
 package com.udojava.jmx.wrapper;
 
 import java.lang.annotation.Annotation;
-import java.lang.management.ManagementFactory;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
-
+import java.util.HashMap;
 import javax.management.Attribute;
 import javax.management.AttributeList;
 import javax.management.AttributeNotFoundException;
@@ -47,7 +46,6 @@ import javax.management.MBeanException;
 import javax.management.MBeanInfo;
 import javax.management.MBeanOperationInfo;
 import javax.management.MBeanParameterInfo;
-import javax.management.MBeanServer;
 import javax.management.ReflectionException;
 
 /**
@@ -262,6 +260,8 @@ public class JMXBeanWrapper implements DynamicMBean {
 		List<MBeanAttributeInfo> attributes = getBeanAttributeInfos(bean);
 
 		List<MBeanOperationInfo> operations = getBeanOperationInfos(bean);
+
+        Collections.sort( operations, new MBeanOperationInfoComparator() );
 
 		this.beanInfo = new MBeanInfo(beanName, beanDescription,
 				attributes.toArray(new MBeanAttributeInfo[0]), null,
@@ -587,4 +587,9 @@ public class JMXBeanWrapper implements DynamicMBean {
 		return bean.toString() + ":" + beanInfo.toString();
 	}
 
+    private class MBeanOperationInfoComparator implements java.util.Comparator<MBeanOperationInfo> {
+        public int compare( MBeanOperationInfo lhs, MBeanOperationInfo rhs ) {
+            return lhs.toString().compareToIgnoreCase( rhs.toString() );
+        }
+    }
 }
