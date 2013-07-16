@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.udojava</groupId>
 	<artifactId>jmxwrapper</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.0.2-SNAPSHOT</version>
 	<name>JMXWrapper</name>
 	<description>JMXWrapper is a wrapper that allows creation of dynamic JMX MBeans through annotations</description>
 
