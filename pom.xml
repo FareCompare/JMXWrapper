@@ -11,6 +11,13 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
+    <scm>
+        <connection>scm:git:git@github.com:FareCompare/JMXWrapper.git</connection>
+        <url>scm:git:git@github.com:FareCompare/JMXWrapper.git</url>
+        <developerConnection>scm:git:git@github.com:FareCompare/JMXWrapper.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
     <distributionManagement>
         <repository>
             <id>internal</id>
