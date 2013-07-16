@@ -159,18 +159,18 @@ public class BeanAnnotationTest {
 		JMXBeanWrapper bean = new JMXBeanWrapper(new TestBeanDefaults());
 
 		assertEquals("voidMethod",
-				bean.getMBeanInfo().getOperations()[0].getName());
+				bean.getMBeanInfo().getOperations()[1].getName());
 		assertEquals("",
-				bean.getMBeanInfo().getOperations()[0].getDescription());
+				bean.getMBeanInfo().getOperations()[1].getDescription());
 		assertEquals("void",
-				bean.getMBeanInfo().getOperations()[0].getReturnType());
+				bean.getMBeanInfo().getOperations()[1].getReturnType());
 		assertEquals(0,
-				bean.getMBeanInfo().getOperations()[0].getSignature().length);
+				bean.getMBeanInfo().getOperations()[1].getSignature().length);
 		assertEquals(MBeanOperationInfo.UNKNOWN,
-				bean.getMBeanInfo().getOperations()[0].getImpact());
+				bean.getMBeanInfo().getOperations()[1].getImpact());
 		
 
-		MBeanOperationInfo info = bean.getMBeanInfo().getOperations()[1];
+		MBeanOperationInfo info = bean.getMBeanInfo().getOperations()[0];
 		assertEquals("complexMethod", info.getName());
 		assertEquals("java.lang.String", info.getReturnType());
 		assertEquals(2, info.getSignature().length);
@@ -188,14 +188,14 @@ public class BeanAnnotationTest {
 			SecurityException {
 		JMXBeanWrapper bean = new JMXBeanWrapper(new TestBeanFullyDescribed());
 
-		assertEquals("The void method",
-				bean.getMBeanInfo().getOperations()[0].getName());
-		assertEquals("The void method description", bean.getMBeanInfo()
-				.getOperations()[0].getDescription());
+        final MBeanOperationInfo voidMethodInfo = bean.getMBeanInfo().getOperations()[1];
+        assertEquals( "The void method",
+                      voidMethodInfo.getName() );
+		assertEquals( "The void method description", voidMethodInfo.getDescription() );
 		assertEquals(MBeanOperationInfo.INFO,
-				bean.getMBeanInfo().getOperations()[0].getImpact());
+				voidMethodInfo.getImpact());
 
-		MBeanOperationInfo info = bean.getMBeanInfo().getOperations()[1];
+		MBeanOperationInfo info = bean.getMBeanInfo().getOperations()[0];
 		assertEquals(2, info.getSignature().length);
 		assertEquals("The name", info.getSignature()[0].getName());
 		assertEquals("The name description", info.getSignature()[0].getDescription());
